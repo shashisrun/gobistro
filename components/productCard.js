@@ -7,7 +7,7 @@ import { addNamedDocument, createRef, getDocument, serverTimestamp } from '../co
 import { useDomain } from '../contexts/domainContext';
 import AddToCart from './addToCart';
 
-export default function ProductCard({ product, compact }) {
+export default function ProductCard({ product, compact, addToCart, noDivider }) {
     const { user } = useAuth();
     const [favourate, setFavoute] = React.useState(false);
     const { domain } = useDomain();
@@ -102,9 +102,12 @@ export default function ProductCard({ product, compact }) {
                                     <button className="btn btn-primary rounded-full w-8 h-8 p-0 min-h-0">+</button>
                                 </div> */}
                 </div>
-                <AddToCart product={product} />
+                <AddToCart product={product} addToCart={addToCart} />
             </div>
-            <div className="w-2/3 mx-auto rounded h-1 bg-secondary my-1"></div>
+            {!noDivider ? 
+                <div className="w-2/3 mx-auto rounded h-1 bg-secondary my-1"></div>
+            :
+            <></> }
         </>
     )
 }

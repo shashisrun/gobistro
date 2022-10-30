@@ -2,7 +2,7 @@ import React from 'react';
 import { useDomain } from '../contexts/domainContext';
 import { useAuth } from '../contexts/authContext';
 import { addNamedDocument, serverTimestamp, deleteDocument, createRef } from '../config/firebase';
-export default function AddToCart({ product }) {
+export default function AddToCart({ product, addToCart }) {
     const [isInCart, setIsInCart] = React.useState(false);
     const [quantity, setQuantity] = React.useState(0);
     const { domain } = useDomain();
@@ -104,7 +104,7 @@ export default function AddToCart({ product }) {
                 {!isInCart ?
                     <>
                         <button className='btn btn-primary w-full' onClick={incrementItem}>
-                            Add To Cart (₹{product.price})
+                            {addToCart ? addToCart : 'Add To Cart'} (₹{product.price})
                         </button>
                     </>
                     :

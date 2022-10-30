@@ -14,9 +14,11 @@ export default function Menu() {
             getDocument(`restaurants/${domain.domain}/cuisines`, query.id).then((response) => {
                 setTitle(response.name)
             });
+            console.log(query.id);
             const ref = createRef(`restaurants/${domain.domain}/cuisines`, query.id)
             const whereFavQuery = where("cuisines", "array-contains", ref);
             getDocuments(`restaurants/${domain.domain}/foods`, whereFavQuery).then((data) => {
+                console.log(ref);
                 console.log(data);
                 setMeals(data)
             });
