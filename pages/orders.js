@@ -10,8 +10,8 @@ export default function Orders() {
     const { user } = useAuth();
     React.useEffect(() => {
         if (domain && user) {
-            const whereFavQuery = where('isBilled', "eq", false)
-            getDocuments(`users/${user.uid}/restaurants/${domain.domain}/orders`).then((data) => {
+            const whereFavQuery = where('isBilled', "==", false)
+            getDocuments(`users/${user.uid}/restaurants/${domain.domain}/orders`, whereFavQuery).then((data) => {
                 console.log(data);
                 setOrders(data);
             });
