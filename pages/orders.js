@@ -2,7 +2,7 @@ import React from 'react';
 import OrderList from '../components/orderList'
 import { useDomain } from '../contexts/domainContext';
 import { useAuth } from '../contexts/authContext';
-import { getDocuments, where, documentId, addDocument, addNamedDocument, deleteDocument, createRef } from '../config/firebase';
+import { getDocuments, where } from '../config/firebase';
 
 export default function Orders() {
     const [orders, setOrders] = React.useState([]);

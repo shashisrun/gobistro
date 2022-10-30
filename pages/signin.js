@@ -1,6 +1,6 @@
 import React from "react";
-import { useAuth } from "../../contexts/authContext";
-import { addNamedDocument, getDocument } from "../../config/firebase";
+import { useAuth } from "../contexts/authContext";
+import { addNamedDocument, getDocument } from "../config/firebase";
 
 export default function AskName() {
     const [name, setName] = React.useState('');
