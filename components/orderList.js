@@ -14,15 +14,18 @@ export default function OrderList({ orders }) {
             const mealIds = [];
             orders.map((order) => mealIds.push(order.product.id))
             const whereFavQuery = where(documentId(), "in", mealIds)
-            getDocuments(`restaurants/${domain.domain}/foods`, whereFavQuery).then((data) => {
+            getDocuments(`restaurants/${domain.domain}/foods`, whereFavQuery).then(async (data) => {
+                const tables = await getDocuments(`/restaurants/${domain.domain}/tables`)
                 const updatedOrders = [];
                 for (let i = 0; i < orders.length; i++) {
                     const filteredOrder = {...orders[i]}
                     filteredOrder.product = data.filter((meal) => filteredOrder.product.id === meal.id)[0];
+                    filteredOrder.tableData = tables.filter((table) => filteredOrder.table.id === table.id)[0];
                     filteredOrder.orderedBy = user.uid === filteredOrder.user.id ? 'You' : filteredOrder.userName;
                     updatedOrders.push(filteredOrder);
                 }
                 setOrderList(updatedOrders)
+                console.log(updatedOrders)
             });
         }
     }, [user, domain, orders])

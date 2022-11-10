@@ -2,7 +2,6 @@ import ProductCard from "./productCard"
 import moment from 'moment';
 
 export default function OrderCard({ order }) {
-    console.log(order)
     return (
         <>
             <div className="card w-full my-5 ">
@@ -23,9 +22,9 @@ export default function OrderCard({ order }) {
                     <p className="text-l">
                         Quantity: {order.quantity}
                     </p>
-                    {order.table ?
+                    {order.tableData ?
                         <p className="text-l">
-                            Order Table: {order.table}
+                            Order Table: {order.tableData.table}
                         </p>
                     : <></>}
                     <div className="w-full">

@@ -45,7 +45,7 @@ export default function Cart() {
                                 let orderedItems = 0;
                                 for (let i = 0; i < cartItems.length; i++) {
                                     const { id, createdAt, updatedAt, ...requestData} = cartItems[i]
-                                    requestData.table = domain.table
+                                    requestData.table = createRef(`/restaurants/${domain.domain}/tables`, domain.table)
                                     requestData.user = createRef('users', user.uid);
                                     requestData.userPhone = user.phoneNumber;
                                     requestData.userName = user.profile.name;
