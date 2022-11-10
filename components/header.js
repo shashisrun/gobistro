@@ -1,14 +1,12 @@
 
 import React from 'react';
-import { TbArmchair2 } from 'react-icons/tb';
 import { IoRepeatOutline } from 'react-icons/io5';
-import { useDomain } from '../contexts/domainContext';
+import Table from './header/table';
 
 export default function Header() {
     const [darkMode, setDarkMode] = React.useState(true);
     const [suugestions, setSuggestions] = React.useState(false);
     const [search, setSearch] = React.useState('');
-    const { domain, setDomain } = useDomain();
 
     const previousSearchers = [
         'Hakka Noodles',
@@ -62,39 +60,16 @@ export default function Header() {
         <header className="px-2 py-3 w-full sticky top-0 bg-base-200 flex-none h-18 z-50">
             <div className="flex flex-row">
                 <div className="w-2/12">
-                    <label htmlFor="choose-table-modal" className="btn bg-primary modal-button">
-                        {domain ? domain.table : <TbArmchair2 size={24} />}
-                    </label>
-                    <input type="checkbox" id="choose-table-modal" className="modal-toggle"/>
-                    <div className="modal">
-                        <div className="modal-box z-50">
-                            {domain && domain.table ?
-                                <>
-                                    <h3 className="font-bold text-lg">Welcome to, {domain.domain}</h3>
-                                    <p className="py-4">Your orders are getting placed for table { domain.table }</p>
-                                    <div className="modal-action">
-                                        <label htmlFor="choose-table-modal" className="btn">Done!</label>
-                                    </div>
-                                </>
-                                :
-                                <>
-                                    <h3 className="font-bold text-lg">Sorry!</h3>
-                                    <p className="py-4">You have not scanned any menu yet, please scan one to use the app!</p>
-                                    <div className="modal-action">
-                                        <label htmlFor="choose-table-modal" className="btn">Okay</label>
-                                    </div>
-                                </>
-                            }
-                        </div>
-                    </div>
+                    <Table />
                 </div>
                 <div className="w-8/12 px-2">
-                    <input type="text" placeholder="Search" className="input rounded-full input-bordered w-full max-w-xs" value={search} onChange={(event) => setSearch(event.target.value)} onFocus={() => {
+                    {/* <input type="text" placeholder="Search" className="input rounded-full input-bordered w-full max-w-xs" value={search} onChange={(event) => setSearch(event.target.value)} onFocus={() => {
                         setSuggestions(true)
                         }}
                         onBlur={() => {
                         }}
-                    />
+                    /> */}
+                    
                 </div>
                 <div className="w-2/12">
                     <label className="swap swap-rotate btn bg-transparent hover:bg-transparent">
