@@ -43,7 +43,7 @@ export default function Table() {
                                 <button className='btn btn-primary' onClick={() => {
                                     callCaptain()
                                 }}>
-                                    {ring ? 'Call Captain' : 'Stop Calling'}
+                                    {ring ? 'Stop Calling' : 'Call Captain'}
                                 </button>
                                 <label htmlFor="choose-table-modal" className="btn">Close</label>
                             </div>
