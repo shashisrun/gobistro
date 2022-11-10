@@ -3,12 +3,14 @@ import { TbArmchair2 } from 'react-icons/tb';
 import { getDocument, updateDocument } from '../../config/firebase';
 import { useDomain } from '../../contexts/domainContext';
 import { useRestaurant } from '../../contexts/restaurantContext';
+import { useAuth } from '../../contexts/authContext';
 
 export default function Table() {
     const [table, setTable ] = React.useState({})
     const [ring, setRing ] = React.useState(false)
     const { domain } = useDomain();
     const { restaurant } = useRestaurant();
+    const { user } = useAuth();
 
     const callCaptain = () => {
         updateDocument(`restaurants/${domain.domain}/tables/`, {
@@ -23,9 +25,20 @@ export default function Table() {
             getDocument(`restaurants/${domain.domain}/tables/`, domain.table).then((data) => {
                 setTable(data)
                 setRing(data.isCalling)
+                if (user && user.profile) {
+                    const users = data.currentUsers ? [...data.currentUsers] : []
+                    if (!users.filter((u) => u.id === user.uid)[0]) {
+                        getDocument(`users`, user.uid).then((curentuser) => {
+                            users.push({ ...curentuser, id: user.uid })
+                            updateDocument(`restaurants/${domain.domain}/tables/`, {
+                                currentUsers: users
+                            }, domain.table)
+                        })
+                    }
+                }
             })
         }
-    }, [domain])
+    }, [domain, user])
 
     return (
         <>
